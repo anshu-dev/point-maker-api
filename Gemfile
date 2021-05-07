@@ -25,6 +25,8 @@ gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rgeo-geojson'
 gem 'firebase'
+gem 'devise'
+gem 'doorkeeper'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -33,6 +35,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0.0'
   gem "factory_bot_rails"
+  gem 'dotenv-rails'
 end
 
 group :development do

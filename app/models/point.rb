@@ -2,9 +2,10 @@ require 'rgeo/geo_json'
 
 class Point < ApplicationRecord
 
-  BASE_URL = 'https://mapbox-db-default-rtdb.firebaseio.com/'
-  
+  BASE_URL = ENV['BASE_URL']
+
   after_save :update_to_firebase
+  belongs_to :user
 
   def encode_coordinates
 
@@ -16,8 +17,9 @@ class Point < ApplicationRecord
   end
 
   private
+
     def update_to_firebase
-      response = client.push("point", self.as_json)
+      client.push("point", self.as_json)
     end
 
     def client

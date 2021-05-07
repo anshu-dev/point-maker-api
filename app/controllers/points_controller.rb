@@ -6,11 +6,12 @@ class PointsController < ApplicationController
   end
 
   def create
+
     point = Point.new(point_params)
     if point.save
       render json: point
     else
-      render json: { errors: 'there is some issue in storing' }, status: 403
+      render json: { errors: 'there is some issue in storing' }, status: :forbidden
     end
   end
 
@@ -19,7 +20,7 @@ class PointsController < ApplicationController
     if point
       render json: point
     else
-      render json: { errors: 'No matching record found' }, status: 404
+      render json: { errors: 'No matching record found' }, status: :not_found
     end
   end
 
@@ -28,16 +29,16 @@ class PointsController < ApplicationController
     if point.update(point_params)
       render json: point
     else
-      render json: { errors: 'there is some issue in update' }, status: 403
+      render json: { errors: 'there is some issue in update' }, status: :forbidden
     end
   end
 
   def destroy
     point = Point.find(params[:id])
     if point.destroy
-      render json: point 
+      render json: point
     else
-      render json: { errors: 'there is some issue in deletion' }, status: 403
+      render json: { errors: 'there is some issue in deletion' }, status: :forbidden
     end
   end
 
@@ -45,5 +46,5 @@ class PointsController < ApplicationController
 
   def point_params
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params)
-  end    
+  end
 end

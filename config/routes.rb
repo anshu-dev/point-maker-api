@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  use_doorkeeper
+
+  scope :api, module: :api, defaults: { format: :json } do
+    devise_for :users, only: %i[sessions registrations], controllers: {
+      sessions: 'api/users/sessions',
+      registrations: 'api/users/registrations'
+    }
+  end
+
   resources :points
 end
+
