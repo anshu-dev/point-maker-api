@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     }
   end
 
-  resources :points
+  resources :points do
+    get :search, on: :collection
+  end
 end
 

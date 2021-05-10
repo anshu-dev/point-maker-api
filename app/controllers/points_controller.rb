@@ -1,13 +1,13 @@
 class PointsController < ApplicationController
 
   def index
-    points = Point.all
+    points = current_user.points.order('updated_at DESC')
+
     render json: points
   end
 
   def create
-
-    point = Point.new(point_params)
+    point = current_user.points.new(point_params)
     if point.save
       render json: point
     else
@@ -42,9 +42,18 @@ class PointsController < ApplicationController
     end
   end
 
+  def search
+    points = current_user.points.where("name ilike ?","%#{params[:query]}%")
+    render json: points
+  end
+
   private
 
   def point_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params)
+    jsonapi_parsed_params(params, :point).require(:point).permit(
+      :name,
+      :longitude,
+      :latitude
+    )
   end
 end

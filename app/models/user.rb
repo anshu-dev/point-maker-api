@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  has_many :points
-
   validates_uniqueness_of :email, :username
+
+  has_many :points
 end
