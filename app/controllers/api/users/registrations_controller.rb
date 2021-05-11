@@ -2,7 +2,7 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :doorkeeper_authorize!
 
   def create
-    build_resource(sign_up_params)
+    build_resource(user_params)
 
     resource.save
     if resource.persisted?
@@ -10,5 +10,16 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def user_params
+    params.permit(
+      :email,
+      :username,
+      :password,
+      :password_confirmation
+    )
   end
 end
