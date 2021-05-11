@@ -15,7 +15,7 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.permit(
+    jsonapi_parsed_params(params, :user).require(:user).permit(
       :email,
       :username,
       :password,
