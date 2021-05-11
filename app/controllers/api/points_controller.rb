@@ -1,4 +1,4 @@
-class PointsController < ApplicationController
+class Api::PointsController < ApplicationController
 
   def index
     points = current_user.points.order('updated_at DESC')

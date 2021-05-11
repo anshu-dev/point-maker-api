@@ -6,10 +6,11 @@ Rails.application.routes.draw do
       sessions: 'api/users/sessions',
       registrations: 'api/users/registrations'
     }
+
+    resources :points do
+      get :search, on: :collection
+    end
   end
 
-  resources :points do
-    get :search, on: :collection
-  end
 end
 
