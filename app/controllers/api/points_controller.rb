@@ -67,6 +67,6 @@ class Api::PointsController < ApplicationController
       geometry: @point[:geometry]
     }
 
-    Firestore.new.update_to_firestore('points', data, @points.id)
+    Firestore.new.update_to_firestore('points', data, @point.id)
   end
 end
