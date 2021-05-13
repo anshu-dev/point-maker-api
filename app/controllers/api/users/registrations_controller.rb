@@ -1,5 +1,6 @@
 class Api::Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :doorkeeper_authorize!
+  after_action :update_to_firestore, only: [:create]
 
   def create
     build_resource(user_params)
@@ -21,5 +22,14 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
       :password,
       :password_confirmation
     )
+  end
+
+  def update_to_firestore
+    data = {
+      email: resource[:email],
+      username: resource[:username]
+    }
+
+    Firestore.new.update_to_firestore('users', data, resource.id)
   end
 end

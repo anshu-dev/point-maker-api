@@ -1,4 +1,6 @@
 class Api::PointsController < ApplicationController
+  after_action :update_to_firestore, only: [:create, :update]
+
   def index
     @points = current_user.points
     @points = (params[:name] ? search : @points).order('updated_at DESC')
@@ -7,9 +9,9 @@ class Api::PointsController < ApplicationController
   end
 
   def create
-    point = current_user.points.new(point_params)
-    if point.save
-      render json: point
+    @point = current_user.points.new(point_params)
+    if @point.save
+      render json: @point
     else
       render json: { errors: 'there is some issue in storing' }, status: :forbidden
     end
@@ -25,9 +27,10 @@ class Api::PointsController < ApplicationController
   end
 
   def update
-    point = Point.find(params[:id])
-    if point.update(point_params)
-      render json: point
+    @point = Point.find(params[:id])
+
+    if @point.update(point_params)
+      render json: @point
     else
       render json: { errors: 'there is some issue in update' }, status: :forbidden
     end
@@ -56,5 +59,14 @@ class Api::PointsController < ApplicationController
         :latitude
       ]
     )
+  end
+
+  def update_to_firestore
+    data = {
+      name: @point[:name],
+      geometry: @point[:geometry]
+    }
+
+    Firestore.new.update_to_firestore('points', data, @points.id)
   end
 end

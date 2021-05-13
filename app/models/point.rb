@@ -5,7 +5,7 @@ class Point < ApplicationRecord
   BASE_URL = ENV['BASE_URL']
 
   before_save :encode_coordinates
-  after_save :update_to_firebase
+
   belongs_to :user
 
   def encode_coordinates
@@ -28,14 +28,4 @@ class Point < ApplicationRecord
   def coordinates
     geometry['coordinates']
   end
-
-  private
-
-    def update_to_firebase
-      # client.push("point", self.as_json)
-    end
-
-    def client
-      @_client ||= Firebase::Client.new(BASE_URL)
-    end
 end

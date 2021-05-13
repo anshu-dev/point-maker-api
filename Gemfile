@@ -25,6 +25,7 @@ gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rgeo-geojson'
 gem 'firebase'
+gem 'google-cloud-firestore'
 gem 'devise'
 gem 'doorkeeper'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
