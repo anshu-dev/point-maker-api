@@ -10,9 +10,7 @@ Rails.application.routes.draw do
       registrations: 'api/users/registrations'
     }
 
-    resources :points do
-      get :search, on: :collection
-    end
+    resources :points
   end
 
 end

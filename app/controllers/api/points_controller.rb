@@ -1,8 +1,9 @@
 class Api::PointsController < ApplicationController
   def index
-    points = current_user.points.order('updated_at DESC')
+    @points = current_user.points
+    @points = (params[:name] ? search : @points).order('updated_at DESC')
 
-    render json: points
+    render json: @points
   end
 
   def create
@@ -41,12 +42,11 @@ class Api::PointsController < ApplicationController
     end
   end
 
-  def search
-    points = current_user.points.where("name ilike ?","%#{params[:query]}%")
-    render json: points
-  end
-
   private
+
+  def search
+    @points.where("name ilike ?","%#{params[:name]}%")
+  end
 
   def point_params
     jsonapi_parsed_params(params, :point).require(:point).permit(
