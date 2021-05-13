@@ -1,5 +1,4 @@
 class Api::PointsController < ApplicationController
-
   def index
     points = current_user.points.order('updated_at DESC')
 
@@ -52,8 +51,10 @@ class Api::PointsController < ApplicationController
   def point_params
     jsonapi_parsed_params(params, :point).require(:point).permit(
       :name,
-      :longitude,
-      :latitude
+      geometry: [
+        :longitude,
+        :latitude
+      ]
     )
   end
 end

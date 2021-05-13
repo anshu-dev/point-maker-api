@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   validates_uniqueness_of :email, :username
+  validates_presence_of :email, :username
 
   has_many :points
 

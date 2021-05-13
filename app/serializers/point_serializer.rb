@@ -5,4 +5,11 @@ class PointSerializer < ActiveModel::Serializer
     object.user.username
   end
 
+  def latitude
+    object.coordinates.last
+  end
+
+  def longitude
+    object.coordinates.first
+  end
 end

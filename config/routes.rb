@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   end
 
   scope :api, module: :api, defaults: { format: :json } do
-    devise_for :users, only: %i[sessions registrations], controllers: {
-      sessions: 'api/users/sessions',
+    devise_for :users, only: %i[passwords registrations confirmations], controllers: {
+      passwords: 'api/users/passwords',
+      confirmations: 'api/users/confirmations',
       registrations: 'api/users/registrations'
     }
 
