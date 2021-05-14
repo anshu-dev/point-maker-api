@@ -1,10 +1,10 @@
 require 'rgeo/geo_json'
 
 class Point < ApplicationRecord
-
-  BASE_URL = ENV['BASE_URL']
+  include FirestoreConcern
 
   before_save :encode_coordinates
+  after_save :update_firestore
 
   belongs_to :user
 
@@ -27,5 +27,13 @@ class Point < ApplicationRecord
 
   def coordinates
     geometry['coordinates']
+  end
+
+  def firestore_data
+    {
+      name: self[:name],
+      geometry: self[:geometry],
+      created_by: user.username
+    }
   end
 end

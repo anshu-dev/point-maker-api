@@ -7,8 +7,8 @@ class Firestore
     )
   end
 
-  def update_to_firestore(model, params, doc_id)
-    record = @firestore.col(model).doc(doc_id)
+  def create_or_update(table_name, params, doc_id)
+    record = @firestore.col(table_name).doc(doc_id)
     record.set(params)
   end
 end

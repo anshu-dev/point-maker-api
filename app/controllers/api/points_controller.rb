@@ -1,6 +1,4 @@
 class Api::PointsController < ApplicationController
-  after_action :update_to_firestore, only: [:create, :update]
-
   def index
     @points = current_user.points
     @points = (params[:name] ? search : @points).order('updated_at DESC')
@@ -59,14 +57,5 @@ class Api::PointsController < ApplicationController
         :latitude
       ]
     )
-  end
-
-  def update_to_firestore
-    data = {
-      name: @point[:name],
-      geometry: @point[:geometry]
-    }
-
-    Firestore.new.update_to_firestore('points', data, @point.id)
   end
 end
