@@ -13,7 +13,11 @@ class Point < ApplicationRecord
   end
 
   def decode_coordinates
-    geoData = {"type":"Point","coordinates":["#{longitude}", "#{latitude}"]}.as_json
+    geoData = {
+      "type":"Point",
+      "coordinates":["#{longitude}", "#{latitude}"]
+    }.as_json
+
     RGeo::GeoJSON.decode(geoData)
   end
 

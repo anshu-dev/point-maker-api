@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :doorkeeper_authorize!
+
   include JsonApiDeserialization
 
   respond_to :json

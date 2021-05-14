@@ -6,6 +6,8 @@ module FirestoreConcern
   protected
 
   def update_firestore
+    return if Rails.env.test?
+
     Firestore.new.create_or_update(table_name, firestore_data, id)
   end
 
