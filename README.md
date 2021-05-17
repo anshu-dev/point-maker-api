@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It is API only Rails App which has included APIs for to perform CRUD operation on point, received from map.
 
-Things you may want to cover:
+## Ruby version
+* 2.6.7
 
-* Ruby version
+## Rails version
+* 6.1.3.1
 
-* System dependencies
+## Installation
 
-* Configuration
+* `git clone https://github.com/anshu-dev/point-maker-api.git` 
+* `cd point-maker-web`
+* `bundle install`
 
-* Database creation
 
-* Database initialization
+## Database configuration
+* Postgresql is used as database.
+* Modify `config/database.yml` with your postgresql setting.
+* Run `rails db:create`
+* Run `rails db:migrate`
 
-* How to run the test suite
+## Running / Development
 
-* Services (job queues, cache servers, search engines, etc.)
+* `rails s`
+* Visit your app at [http://localhost:4200](http://localhost:3000/points).
 
-* Deployment instructions
-
-* ...
+## Heroku URL
+* https://point-maker-api.herokuapp.com/points

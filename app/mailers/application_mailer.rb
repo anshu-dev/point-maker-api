@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: "Point Maket <#{ENV['SMTP_USERNAME']}>"
   layout 'mailer'
 end
