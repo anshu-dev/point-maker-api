@@ -22,13 +22,4 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
       :password_confirmation
     )
   end
-
-  def update_to_firestore
-    data = {
-      email: resource[:email],
-      username: resource[:username]
-    }
-
-    Firestore.new.update_to_firestore('users', data, resource.id)
-  end
 end
